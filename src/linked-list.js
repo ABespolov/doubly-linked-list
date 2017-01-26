@@ -24,7 +24,9 @@ class LinkedList {
         this.length++;
     }
 
-    head() {}
+    head() {
+        return this.head.data;
+    }
 
     tail() {}
 
