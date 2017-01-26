@@ -1,12 +1,11 @@
 
 const Node = require('./node');
 
-class LinkedList {
-    constructor() {
+class LinkedList extends Node{
 
-    }
 
     append(data) {
+
 
     }
 
