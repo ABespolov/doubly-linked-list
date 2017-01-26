@@ -47,7 +47,26 @@ class LinkedList {
     }
 
     insertAt(index, data) {
+        var node = new Node(data);
 
+        var currentNode = this.listHead,
+            count = 0;
+        while(count < index){
+            currentNode = currentNode.next;
+            count++;
+        }
+
+        if(node.prev != null){
+            node.prev = currentNode.prev;
+            node.next = currentNode;
+            currentNode.prev = node;
+            node.prev.next = node;
+        }else{
+            this.listHead = node;
+            node.next = currentNode;
+            currentNode.prev = node;
+        }
+        this.length++;
     }
 
     isEmpty() {
@@ -62,10 +81,19 @@ class LinkedList {
     }
 
     deleteAt(index) {
-
+        var currentNode = this.listHead,
+            count = 0;
+        while(count < index){
+            currentNode = currentNode.next;
+            count++;
+        }
+        currentNode.prev.next = currentNode.next;
+        currentNode.next.prev = currentNode.prev;
     }
 
-    reverse() {}
+    reverse() {
+
+    }
 
     indexOf(data) {
         var currentNode = this.listHead,
