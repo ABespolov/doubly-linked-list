@@ -6,20 +6,20 @@ class LinkedList {
     constructor() {
         this.length = 0;
         this.head = null;
+        this.tail = null;
     }
 
     append(data) {
-        var node = new Node();
+        var node = new Node(data);
 
         if (this.length == 0) {
             this.head = node;
-            node.data = data;
+            this.tail = node;
         }
         else {
             this.head.next = node;
-            node.prev = this.head;
-            this.head = node;
-            node.data = data;
+            node.prev = this.tail;
+            this.tail = node;
         }
         this.length++;
     }
@@ -28,7 +28,9 @@ class LinkedList {
         return this.head.data;
     }
 
-    tail() {}
+    tail() {
+
+    }
 
     at(index) {}
 
