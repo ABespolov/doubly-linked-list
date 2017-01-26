@@ -29,10 +29,20 @@ class LinkedList {
     }
 
     tail() {
-
+        return this.head.tail;
     }
 
-    at(index) {}
+    at(index) {
+        var currentNode = this.head,
+            length = this.length,
+            count = 1;
+
+        while(count < index){
+            currentNode = currentNode.next;
+            count++;
+        }
+        return currentNode.data;
+    }
 
     insertAt(index, data) {}
 
