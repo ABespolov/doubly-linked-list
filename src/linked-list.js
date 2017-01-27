@@ -22,13 +22,20 @@ class LinkedList {
             this._tail = node;
         }
         this.length++;
+        return this;
     }
 
     head() {
+        if(this._head == null){
+            return null;
+        }
         return this._head.data;
     }
 
     tail() {
+        if(this._tail == null){
+            return null;
+        }
         return this._tail.data;
     }
 
@@ -37,7 +44,7 @@ class LinkedList {
             length = this.length,
             count = 0;
 
-        while (count < index) {
+        while(count < index){
             currentNode = currentNode.next;
             count++;
         }
@@ -49,45 +56,60 @@ class LinkedList {
 
         var currentNode = this._head,
             count = 0;
-        while (count < index) {
+        while(count < index){
             currentNode = currentNode.next;
             count++;
         }
 
-
-        node.prev = currentNode.prev;
-        node.next = currentNode;
-        currentNode.prev = node;
-        node.prev.next = node;
+        if(currentNode == null){
+            currentNode = node;
+        }else{
+            node.prev = currentNode.prev;
+            node.next = currentNode;
+            currentNode.prev = node;
+            if(node.prev != null){
+                node.prev.next = node;
+            }
+        }
 
         this.length++;
 
+        return this;
     }
 
     isEmpty() {
-        if (this.length > 0) return false;
+        if(this.length > 0) return false;
         else return true;
     }
 
     clear() {
         this.length = 0;
-        this._head.data = null;
-        this._tail.data = null;
+        this._head = null;
+        this._tail = null;
+
+        return this;
     }
 
     deleteAt(index) {
         var currentNode = this._head,
             count = 0;
-        while (count < index) {
+        while(count < index){
             currentNode = currentNode.next;
             count++;
         }
-        currentNode.prev.next = currentNode.next;
-        currentNode.next.prev = currentNode.prev;
+        if(currentNode.next == null && currentNode.prev == null){
+            currentNode = null;
+        }else{
+
+            currentNode.prev.next = currentNode.next;
+            currentNode.next.prev = currentNode.prev;
+        }
+
+        return this;
     }
 
     reverse() {
-
+        return this;
     }
 
     indexOf(data) {
@@ -95,8 +117,8 @@ class LinkedList {
             length = this.length,
             count = 0;
 
-        while (count < length) {
-            if (currentNode.data == data) {
+        while(count < length){
+            if(currentNode.data == data){
                 return count;
             }
             currentNode = currentNode.next;
@@ -105,5 +127,6 @@ class LinkedList {
         return -1;
     }
 }
+
 
 module.exports = LinkedList;
